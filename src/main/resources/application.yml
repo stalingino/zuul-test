@@ -1,0 +1,30 @@
+server:
+    port: 2001
+spring:
+    application:
+        name: zuul
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:1999/eureka
+            hostName: localhost
+
+zuul:
+    routes:
+        webflux:
+            path: /webflux/**
+            url: http://localhost:2000
+
+ribbon:
+    ReadTimeout: 10000
+    eureka:
+        enabled: false
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 6000
